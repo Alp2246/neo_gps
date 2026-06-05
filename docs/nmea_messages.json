@@ -1,0 +1,281 @@
+{
+  "GGA": {
+    "id": "GGA",
+    "title": "$GPGGA — Fix Data (Konum Fix Verisi)",
+    "about": "GPS alıcısının o andaki konum fix bilgisini taşır. Enlem, boylam, yükseklik, kaç uydu kullanıldığı ve fix kalitesi burada yazar. Haritadaki konum ve fix göstergesi çoğunlukla bu mesajdan gelir.",
+    "raw": "$GPGGA,154729.00,3646.02509,N,03432.52182,E,1,08,1.34,65.2,M,27.6,M,,*6F",
+    "fields": [
+      {
+        "label": "UTC saat",
+        "value": "154729.00",
+        "hint": "Uydu saati, UTC olarak hhmmss.ss formatında. Örnek: 145023 = 14:50:23 UTC."
+      },
+      {
+        "label": "Enlem",
+        "value": "36.767085° N",
+        "hint": "Bulunduğun noktanın kuzey-güney konumu (WGS84). N=kuzey yarıküre, S=güney."
+      },
+      {
+        "label": "Boylam",
+        "value": "34.542030° E",
+        "hint": "Bulunduğun noktanın doğu-batı konumu (WGS84). E=doğu, W=batı."
+      },
+      {
+        "label": "Fix kalitesi",
+        "value": "GPS fix (SPS)",
+        "hint": "0 fix yok; 1 standart GPS; 2 diferansiyel GPS (DGPS). NEO-6M genelde 0 veya 1 gönderir."
+      },
+      {
+        "label": "Kullanılan uydu sayısı",
+        "value": "08",
+        "hint": "Konum hesabına dahil edilen uydu sayısı. Çok olduğunda fix daha kararlı olur."
+      },
+      {
+        "label": "HDOP",
+        "value": "1.34",
+        "hint": "Horizontal DOP — yatay konum hatası çarpanı. 1–2 iyi, 5 üstü zayıf geometri demektir."
+      },
+      {
+        "label": "Rakım",
+        "value": "65.2 m",
+        "hint": "Deniz seviyesine göre yükseklik (metre). Haritadaki rakım buradan gelir."
+      },
+      {
+        "label": "Geoid ayrımı",
+        "value": "27.6 m",
+        "hint": "WGS84 elipsoid ile gerçek deniz seviyesi arasındaki fark (metre)."
+      }
+    ],
+    "updated": 1637185016.6787467
+  },
+  "GLL": {
+    "id": "GLL",
+    "title": "$GPGLL — Geographic Position (Coğrafi Konum)",
+    "about": "Sadece enlem ve boylam ile fix geçerliliğini bildirir. GGA ve RMC'ye benzer ama daha kısadır; hız/tarih içermez.",
+    "raw": "$GPGLL,3646.02509,N,03432.52182,E,154729.00,A,A*66",
+    "fields": [
+      {
+        "label": "Enlem",
+        "value": "36.767085° N",
+        "hint": "Coğrafi enlem; GGA/RMC ile aynı formatta."
+      },
+      {
+        "label": "Boylam",
+        "value": "34.542030° E",
+        "hint": "Coğrafi boylam."
+      },
+      {
+        "label": "UTC saat",
+        "value": "154729.00",
+        "hint": "Bu konum ölçümünün UTC saati."
+      },
+      {
+        "label": "Durum",
+        "value": "Geçerli (A)",
+        "hint": "A = fix geçerli; V = henüz güvenilir konum yok."
+      }
+    ],
+    "updated": 1637185016.9956849
+  },
+  "GSA": {
+    "id": "GSA",
+    "title": "$GPGSA — Active Satellites (Aktif Uydular)",
+    "about": "Konum hesabında hangi uyduların kullanıldığını ve DOP değerlerini verir. PDOP/HDOP/VDOP düşükse konum daha güvenilirdir. Fix tipi 2D veya 3D olup olmadığını söyler.",
+    "raw": "$GPGSA,A,3,01,04,03,31,09,16,26,07,,,,,2.77,1.34,2.42*0B",
+    "fields": [
+      {
+        "label": "Mod",
+        "value": "Otomatik (A)",
+        "hint": "A = alıcı 2D/3D modu otomatik seçer. M = kullanıcı zorlar (genelde A)."
+      },
+      {
+        "label": "Fix tipi",
+        "value": "3D fix",
+        "hint": "1 = fix yok; 2 = 2D (enlem/boylam); 3 = 3D (rakım da var)."
+      },
+      {
+        "label": "Aktif PRN listesi",
+        "value": "01, 04, 03, 31, 09, 16, 26, 07",
+        "hint": "Navigasyon çözümünde kullanılan GPS uydu numaraları (PRN 1–32)."
+      },
+      {
+        "label": "PDOP",
+        "value": "2.77",
+        "hint": "Position DOP — 3B konum hatası çarpanı. Düşük değer daha iyi."
+      },
+      {
+        "label": "HDOP",
+        "value": "1.34",
+        "hint": "Horizontal DOP — yatay (enlem/boylam) hata çarpanı."
+      },
+      {
+        "label": "VDOP",
+        "value": "2.42",
+        "hint": "Vertical DOP — dikey (rakım) hata çarpanı."
+      }
+    ],
+    "updated": 1637185016.740191
+  },
+  "GSV": {
+    "id": "GSV",
+    "title": "$GPGSV — Satellites in View (Görünen Uydular)",
+    "about": "Gökyüzünde görülen uyduların listesidir. Her uydu için PRN numarası, elevasyon açısı, azimut ve sinyal gücü (SNR) yazar. Mesaj uzun olduğu için birkaç parçaya bölünerek gelir.",
+    "raw": "$GPGSV,3,3,11,19,03,269,18,26,20,068,24,31,18,042,18*4C",
+    "fields": [
+      {
+        "label": "Toplam parça sayısı",
+        "value": "3",
+        "hint": "GSV mesajı kaç NMEA cümlesine bölündü (genelde 2–4)."
+      },
+      {
+        "label": "Bu parçanın numarası",
+        "value": "3",
+        "hint": "Şu an gelen parçanın sıra numarası."
+      },
+      {
+        "label": "Görünen uydu sayısı",
+        "value": "11",
+        "hint": "Anten tarafından görülen toplam uydu sayısı."
+      },
+      {
+        "label": "Uydu PRN 03",
+        "value": "Elevasyon 59° · Azimut 104° · SNR 27 dB",
+        "hint": "PRN 03: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 26",
+        "value": "Elevasyon 20° · Azimut 068° · SNR 24 dB",
+        "hint": "PRN 26: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 01",
+        "value": "Elevasyon 21° · Azimut 176° · SNR 22 dB",
+        "hint": "PRN 01: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 19",
+        "value": "Elevasyon 03° · Azimut 269° · SNR 18 dB",
+        "hint": "PRN 19: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 31",
+        "value": "Elevasyon 18° · Azimut 042° · SNR 18 dB",
+        "hint": "PRN 31: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 09",
+        "value": "Elevasyon 49° · Azimut 288° · SNR 16 dB",
+        "hint": "PRN 09: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 04",
+        "value": "Elevasyon 67° · Azimut 354° · SNR 14 dB",
+        "hint": "PRN 04: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 07",
+        "value": "Elevasyon 31° · Azimut 207° · SNR 11 dB",
+        "hint": "PRN 07: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 16",
+        "value": "Elevasyon 19° · Azimut 100° · SNR 9 dB",
+        "hint": "PRN 16: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 06",
+        "value": "Elevasyon 34° · Azimut 303° · SNR 0 dB",
+        "hint": "PRN 06: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      },
+      {
+        "label": "Uydu PRN 11",
+        "value": "Elevasyon 03° · Azimut 326° · SNR 0 dB",
+        "hint": "PRN 11: elevasyon=gökyüzündeki yükseklik açısı; azimut=kuzeyden saat yönünde derece; SNR=sinyal gücü (yüksek=iyi)."
+      }
+    ],
+    "updated": 1637185016.9405773
+  },
+  "RMC": {
+    "id": "RMC",
+    "title": "$GPRMC — Recommended Minimum (Asgari Navigasyon)",
+    "about": "GPS modülünün gönderdiği asgari navigasyon paketidir. Konum, hız, yön ve tarih/saat tek cümlede gelir. A harfi fix var, V harfi fix yok anlamına gelir.",
+    "raw": "$GPRMC,154729.00,A,3646.02509,N,03432.52182,E,0.385,,050626,,,A*76",
+    "fields": [
+      {
+        "label": "UTC saat",
+        "value": "154729.00",
+        "hint": "O anki UTC saati (hhmmss.ss). Tarih alanı ayrıca gelir."
+      },
+      {
+        "label": "Durum",
+        "value": "Geçerli (A)",
+        "hint": "A = fix geçerli, konuma güvenilebilir. V = fix yok veya henüz kilitlenmedi."
+      },
+      {
+        "label": "Enlem",
+        "value": "36.767085° N",
+        "hint": "RMC içindeki enlem değeri; GGA ile birlikte çapraz kontrol için kullanılır."
+      },
+      {
+        "label": "Boylam",
+        "value": "34.542030° E",
+        "hint": "RMC içindeki boylam değeri."
+      },
+      {
+        "label": "Hız",
+        "value": "0.385 knot",
+        "hint": "Yer hızı, deniz mili/saat (knot). 1 knot ≈ 1.852 km/s."
+      },
+      {
+        "label": "Yön (course)",
+        "value": "—",
+        "hint": "Gerçek kuzeye göre hareket yönü, derece cinsinden (0–360)."
+      },
+      {
+        "label": "Tarih",
+        "value": "050626",
+        "hint": "UTC tarih, ddmmyy formatında. Örnek: 050626 = 5 Haziran 2026."
+      },
+      {
+        "label": "Manyetik sapma",
+        "value": "—",
+        "hint": "Manyetik kuzey ile gerçek kuzey arası fark; boşsa gönderilmemiştir."
+      }
+    ],
+    "updated": 1637185016.56552
+  },
+  "VTG": {
+    "id": "VTG",
+    "title": "$GPVTG — Track Made Good (Yön ve Hız)",
+    "about": "Hareket yönünü (course) ve yer hızını verir. Deniz mili/saat (knot) ve km/saat olarak hız; derece cinsinden yön içerir.",
+    "raw": "$GPVTG,,T,,M,0.385,N,0.713,K,A*28",
+    "fields": [
+      {
+        "label": "Yön (true north)",
+        "value": "—",
+        "hint": "Gerçek (coğrafi) kuzeye göre hareket yönü, derece."
+      },
+      {
+        "label": "Yön (magnetic)",
+        "value": "—",
+        "hint": "Manyetik kuzeye göre yön; pusula ile karşılaştırma için."
+      },
+      {
+        "label": "Hız (knot)",
+        "value": "0.385",
+        "hint": "Yer hızı, deniz mili/saat."
+      },
+      {
+        "label": "Hız (km/h)",
+        "value": "0.713",
+        "hint": "Aynı hızın km/saat cinsinden değeri."
+      },
+      {
+        "label": "Mod",
+        "value": "A",
+        "hint": "A = otonom GPS; D = diferansiyel; N = veri geçersiz."
+      }
+    ],
+    "updated": 1637185016.6012166
+  }
+}

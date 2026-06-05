@@ -1,18 +1,39 @@
 {
   "fix": true,
   "quality": 1,
-  "lat": 36.76715,
-  "lon": 34.54178,
-  "alt": 51.5,
-  "sats_used": 7,
-  "time_utc": "154136.00",
-  "satellites_top_snr": [
-    {"prn": "01", "elev": "24", "azim": "176", "snr": 39},
-    {"prn": "07", "elev": "28", "azim": "206", "snr": 25},
-    {"prn": "26", "elev": "21", "azim": "070", "snr": 25}
-  ],
-  "nmea_types_decoded": ["GGA", "RMC", "GSA", "GSV", "VTG", "GLL"],
-  "fpga_state": "operating",
+  "lat": 36.767085,
+  "lon": 34.54203,
+  "alt_m": 65.2,
+  "sats_used": 8,
+  "time_utc": "154729.00",
+  "location_label": "Mersin, Turkey (live capture)",
+  "map_url": "https://www.openstreetmap.org/?mlat=36.767084833333335&mlon=34.54203033333334#map=17/36.767084833333335/34.54203033333334",
   "captured_from": "http://192.168.2.99:8080/data",
-  "date": "2026-06-05"
+  "date": "2026-06-05",
+  "nmea_messages": {
+    "GGA": {
+      "raw": "$GPGGA,154729.00,3646.02509,N,03432.52182,E,1,08,1.34,65.2,M,27.6,M,,*6F",
+      "title": "$GPGGA — Fix Data (Konum Fix Verisi)"
+    },
+    "GLL": {
+      "raw": "$GPGLL,3646.02509,N,03432.52182,E,154729.00,A,A*66",
+      "title": "$GPGLL — Geographic Position (Coğrafi Konum)"
+    },
+    "GSA": {
+      "raw": "$GPGSA,A,3,01,04,03,31,09,16,26,07,,,,,2.77,1.34,2.42*0B",
+      "title": "$GPGSA — Active Satellites (Aktif Uydular)"
+    },
+    "GSV": {
+      "raw": "$GPGSV,3,3,11,19,03,269,18,26,20,068,24,31,18,042,18*4C",
+      "title": "$GPGSV — Satellites in View (Görünen Uydular)"
+    },
+    "RMC": {
+      "raw": "$GPRMC,154729.00,A,3646.02509,N,03432.52182,E,0.385,,050626,,,A*76",
+      "title": "$GPRMC — Recommended Minimum (Asgari Navigasyon)"
+    },
+    "VTG": {
+      "raw": "$GPVTG,,T,,M,0.385,N,0.713,K,A*28",
+      "title": "$GPVTG — Track Made Good (Yön ve Hız)"
+    }
+  }
 }

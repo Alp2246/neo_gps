@@ -1,67 +1,57 @@
 # PYNQ-Z2 + NEO-6M GPS — Türkçe Rehber
 
-## Donanım fotoğrafları
+## Canlı konum (2026-06-05)
 
-![Kurulum — PYNQ-Z2 + NEO-6M](gps_hardware_setup.png)
+| Alan | Değer |
+|------|-------|
+| Fix | ✅ Var (SPS) |
+| Enlem / Boylam | **36.767085° N, 34.542030° E** |
+| Konum | Mersin |
+| Rakım | 65.2 m |
+| Uydu | 8 |
+| UTC | 15:47:29 |
 
-![Kablolama şeması](wiring_diagram.svg)
+[Haritada aç](https://www.openstreetmap.org/?mlat=36.767085&mlon=34.542030#map=17/36.767085/34.542030)
 
-![NEO-6M modül](neo6m_module.png)
+---
 
-## Bağlantı tablosu
+## Kurulum
 
-| GPS pini | PYNQ RPi header | Açıklama |
-|----------|-----------------|----------|
-| VCC | Pin 1 (3.3 V) | Besleme |
-| GND | Pin 6 | Toprak |
-| TX | **Pin 10** | GPS veri gönderir → FPGA okur |
-| RX | **Pin 8** | FPGA yazar → GPS okur |
-
-## Hızlı başlangıç
+1. NEO-6M kablolama: VCC→Pin1, GND→Pin6, GPS TX→Pin10, GPS RX→Pin8
+2. SSH: `xilinx@192.168.2.99` / `xilinx`
+3. Bitstream yükle ve web'i başlat:
 
 ```bash
 cd ~/neo_gps
 echo gps_uart.bin | sudo tee /sys/class/fpga_manager/fpga0/firmware
-cat /sys/class/fpga_manager/fpga0/state   # operating
 bash start_web.sh
 ```
 
-Tarayıcı: **http://192.168.2.99:8080**
+4. Tarayıcı: **http://192.168.2.99:8080**
 
-## Web arayüzü
+---
 
-| Sekme | Ne gösterir? |
-|-------|----------------|
-| **Pano** | Harita, fix, koordinat, uydu SNR |
-| **NMEA** | GGA/RMC/GSA/GSV/VTG/GLL — alan alan Türkçe açıklama |
+## NMEA sekmesi
 
-## Canlı çıktı örneği
+Dashboard'da **NMEA** sekmesinden GGA, RMC, GSA, GSV, VTG, GLL mesajlarını tek tek seçebilirsin. Her alanın ne anlama geldiği Türkçe açıklamalı.
 
-Karttan alınan gerçek veri: [sample_live_output.json](sample_live_output.json)
+Canlı örnek cümleler: [nmea_messages.json](nmea_messages.json)
 
-```
-fix: true · 8 uydu · 36.767°N 34.542°E · rakım 48 m
-```
+---
 
-## Mimari
+## Sorun giderme
 
-![Yazılım akışı](architecture.svg)
+| Sorun | Çözüm |
+|-------|-------|
+| **Bus error** | Aynı anda `gps_web.py` ve `neo_gps_pynq.py` çalıştırma |
+| Fix yok | Anteni açık gökyüzüne çevir, 1–2 dk bekle |
+| FPGA `operating` değil | `gps_uart.bin` yükle |
+| Port meşgul | `bash start_web.sh` (eski süreçleri öldürür) |
 
-## Sık hatalar
+---
 
-**Bus error** — İki GPS programı aynı anda çalışıyor veya yanlış bitstream.
+## Dosyalar
 
-```bash
-sudo pkill -f 'gps_web.py|neo_gps_pynq.py'
-sudo rm -f /tmp/neo_gps_uart.lock
-echo gps_uart.bin | sudo tee /sys/class/fpga_manager/fpga0/firmware
-bash start_web.sh
-```
-
-**Fix yok** — Anteni açık gökyüzüne çevir; 1–2 dakika bekle.
-
-**I2C testinden sonra GPS çalışmıyor** — `gps_uart.bin` tekrar yükle.
-
-## Sürüm
-
-**v1.0.0** — İlk kararlı sürüm. Detay: [CHANGELOG.md](../CHANGELOG.md)
+- `gps_web.py` — web panosu + NMEA çözücü
+- `neo_gps_pynq.py` — terminal okuyucu
+- `output/gps_uart.bin` — FPGA overlay
