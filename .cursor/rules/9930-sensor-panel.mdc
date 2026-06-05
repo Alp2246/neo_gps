@@ -1,0 +1,30 @@
+---
+description: Kod 9930 — Sensor Panel (OLED+BMP280+MAX7219+GPS), ayri proje, tek calistirma
+alwaysApply: false
+---
+
+# Kod 9930 — Sensor Panel (ayri proje)
+
+**9928** = GPS web dashboard. **9930** = fiziksel sensor panel — **ayni UART, ayni anda calismaz**.
+
+## Deploy
+
+```bat
+cd C:\Users\oalpe\Desktop\neo_gps\sensor_panel
+9930.bat
+```
+
+## Kartta tek calistirma
+
+```bash
+bash ~/sensor_panel/start.sh
+# veya: sudo python3 ~/sensor_panel/panel.py
+```
+
+## Bitstream
+
+`gps_i2c.bin` (combo UART + I2C) — `/home/xilinx/sensor_panel/`
+
+## Servis
+
+`neo-sensor-panel.service` — acilista otomatik. GPS web icin 9928 kullan (neo-gps servisi).

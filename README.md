@@ -247,3 +247,11 @@ MIT — see [LICENSE](LICENSE).
 ---
 
 🇹🇷 [Türkçe kurulum rehberi](docs/README_TR.md)
+
+---
+
+## Related: Sensor Panel (separate project)
+
+Physical displays (OLED + BMP280 + MAX7219 + GPS) — **not** the web dashboard:
+
+→ [sensor_panel/README.md](sensor_panel/README.md) · PC deploy: `sensor_panel/9930.bat`

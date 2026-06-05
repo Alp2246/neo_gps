@@ -30,3 +30,5 @@ When the user says **9928**, they refer to this **stable working setup**. Preser
 ## On "9928" request
 
 Use/deploy this baseline; run or suggest `9928.bat`; keep systemd auto-start enabled.
+
+**Mutual exclusion:** Sensor panel is **9930** (`sensor_panel/9930.bat`) — same UART, cannot run with 9928 simultaneously.

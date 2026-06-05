@@ -1,0 +1,21 @@
+[Unit]
+Description=PYNQ-Z2 Sensor Panel (GPS + OLED + BMP280 + MAX7219)
+After=network.target
+StartLimitIntervalSec=0
+Conflicts=neo-gps.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/xilinx/sensor_panel
+ExecStartPre=/bin/sleep 12
+ExecStartPre=/bin/systemctl stop neo-gps.service
+ExecStartPre=/bin/rm -f /tmp/neo_gps_uart.lock
+ExecStart=/usr/bin/python3 /home/xilinx/sensor_panel/panel.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/xilinx/sensor_panel/panel.log
+StandardError=append:/home/xilinx/sensor_panel/panel.log
+
+[Install]
+WantedBy=multi-user.target
