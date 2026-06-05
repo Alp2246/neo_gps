@@ -1,0 +1,15 @@
+---
+description: Kod 9940 — MAX7219 LED ayri proje, kendi bitstream, tek calistirma
+alwaysApply: false
+---
+
+# Kod 9940 — MAX7219 LED only
+
+Standalone project in `max7219_led/`. No GPS, no BMP280, no OLED.
+
+- Deploy: `max7219_led/9940.bat`
+- Bitstream: `max7219_led.bin` (3-bit AXI GPIO, pins 11/13/15)
+- Run: `bash ~/max7219_led/start.sh` or `sudo python3 display.py`
+- Build bitstream: `max7219_led/vivado/run_build.bat`
+
+Mutually exclusive overlay with 9928/9930 (only one FPGA design loaded at a time).

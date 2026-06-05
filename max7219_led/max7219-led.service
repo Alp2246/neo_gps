@@ -1,0 +1,17 @@
+[Unit]
+Description=PYNQ-Z2 MAX7219 8x8 LED (standalone)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/xilinx/max7219_led
+ExecStartPre=/bin/sleep 8
+ExecStart=/usr/bin/python3 /home/xilinx/max7219_led/display.py
+Restart=always
+RestartSec=5
+StandardOutput=append:/home/xilinx/max7219_led/led.log
+StandardError=append:/home/xilinx/max7219_led/led.log
+
+[Install]
+WantedBy=multi-user.target

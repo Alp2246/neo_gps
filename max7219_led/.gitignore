@@ -1,0 +1,6 @@
+output/*.bit
+output/*.bin
+output/*.bif
+output/*.hwh
+output/build/
+vivado/build/
