@@ -1,5 +1,37 @@
 # PYNQ-Z2 + NEO-6M GPS — Türkçe Rehber
 
+## PC'den tek tıkla yükle (kaçırma)
+
+Kart ve PC aynı ağda. PuTTY (`plink`) + Python PC'de kurulu olmalı.
+
+```bat
+deploy_gps.bat
+```
+
+Ne yapar: dosyaları karta indirir → bitstream yükler → web panosunu açar → tarayıcıda `http://192.168.2.99:8080` açar.
+
+Alternatif (PowerShell):
+
+```powershell
+.\deploy_gps.ps1
+.\deploy_gps.ps1 -Foreground   # web SSH penceresinde kalır
+```
+
+Manuel (PC'de `python -m http.server 8000`, kartta):
+
+```bash
+bash install_on_board.sh http://192.168.2.10:8000
+```
+
+Git clone ile (kartta internet varsa):
+
+```bash
+git clone https://github.com/Alp2246/pynq-z2-gps-nmea.git ~/neo_gps
+cd ~/neo_gps && bash install_on_board.sh
+```
+
+---
+
 ## Canlı konum (2026-06-05)
 
 | Alan | Değer |
@@ -52,6 +84,15 @@ Canlı örnek cümleler: [nmea_messages.json](nmea_messages.json)
 
 ## Dosyalar
 
+- `deploy_gps.bat` / `deploy_gps.ps1` — PC'den yükle + çalıştır
+- `install_on_board.sh` — kartta kurulum
 - `gps_web.py` — web panosu + NMEA çözücü
 - `neo_gps_pynq.py` — terminal okuyucu
 - `output/gps_uart.bin` — FPGA overlay
+
+## İleride eklenebilir
+
+- Açılışta otomatik başlatma (systemd)
+- GPX/KML rota dışa aktarma
+- OLED ekranda koordinat (`sensors/` — WIP)
+- Home Assistant MQTT entegrasyonu

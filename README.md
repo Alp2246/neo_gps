@@ -76,7 +76,51 @@ $GPGLL,3646.02509,N,03432.52182,E,154729.00,A,A*66
 
 ---
 
-## Quick start
+## Deploy from PC (one click)
+
+PC and board on the same network (default board IP **192.168.2.99**). Requires [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) (`plink` in PATH) and Python on the PC.
+
+**Double-click or run:**
+
+```bat
+deploy_gps.bat
+```
+
+Or PowerShell:
+
+```powershell
+.\deploy_gps.ps1
+.\deploy_gps.ps1 -BoardIp 192.168.2.99 -Foreground   # web stays in SSH window
+```
+
+This will:
+
+1. Start a temporary HTTP server on the PC
+2. Download `gps_web.py`, `neo_gps_pynq.py`, `gps_uart.bin` to the board
+3. Load the FPGA bitstream
+4. Start the dashboard in the background
+5. Open **http://192.168.2.99:8080** in your browser
+
+**Manual (SSH on the board):**
+
+```bash
+# PC: in repo folder
+python -m http.server 8000
+
+# Board:
+bash install_on_board.sh http://<PC-IP>:8000
+```
+
+**From git clone on the board:**
+
+```bash
+git clone https://github.com/Alp2246/pynq-z2-gps-nmea.git ~/neo_gps
+cd ~/neo_gps && bash install_on_board.sh
+```
+
+---
+
+## Quick start (manual SSH)
 
 SSH: `xilinx@192.168.2.99` (password `xilinx`)
 
@@ -113,6 +157,9 @@ NEO-6M  ──UART 9600──►  axi_uartlite_0  ◄──MMIO──  gps_web.p
 ## Repository layout
 
 ```
+├── deploy_gps.bat          # Windows: upload + run (double-click)
+├── deploy_gps.ps1          # Same, PowerShell
+├── install_on_board.sh     # Board-side install (wget or git clone)
 ├── gps_web.py              # Web dashboard + NMEA decoder UI
 ├── neo_gps_pynq.py         # MMIO UART reader / probe
 ├── start_web.sh            # Start dashboard on the board
@@ -145,6 +192,20 @@ run_build.bat    REM → output/gps_uart.*
 - TUL PYNQ-Z2 + PYNQ image (Linux 5.4+)
 - u-blox NEO-6M @ 9600 baud
 - PC browser (map tiles from OpenStreetMap)
+
+---
+
+## Roadmap (ideas)
+
+| Feature | Status |
+|---------|--------|
+| One-click PC deploy | ✅ `deploy_gps.bat` |
+| NMEA decoder UI (6 types) | ✅ live |
+| systemd service (boot auto-start) | planned |
+| GPX / KML track export | planned |
+| SSD1306 OLED lat/lon display | WIP in `sensors/` |
+| UBX ephemeris / almanac | blocked (TX path needs loopback test) |
+| Home Assistant MQTT bridge | planned |
 
 ---
 
