@@ -1,6 +1,26 @@
 # PYNQ-Z2 + NEO-6M GPS — Türkçe Rehber
 
-## PC'den tek tıkla yükle (kaçırma)
+## PC'den tek tıkla yükle — **9928**
+
+SD kartı güncelleme. Kart açılınca GPS kendiliğinden başlar.
+
+```bat
+9928.bat
+```
+
+`C:\Users\oalpe\Desktop\neo_gps\9928.bat` — çift tık yeterli.
+
+Kurulum: dosya yükle → bitstream → **systemd** (`neo-gps.service`) → tarayıcı aç.
+
+Servis durumu (kartta):
+
+```bash
+systemctl status neo-gps
+```
+
+---
+
+## PC'den tek tıkla yükle (deploy_gps)
 
 Kart ve PC aynı ağda. PuTTY (`plink`) + Python PC'de kurulu olmalı.
 

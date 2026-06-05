@@ -76,6 +76,36 @@ $GPGLL,3646.02509,N,03432.52182,E,154729.00,A,A*66
 
 ---
 
+## Kod 9928 — PC'den yükle (SD kart dokunma)
+
+Kart açılınca GPS **otomatik** başlar. Yazılım güncellemek için SD kartı çıkarmana gerek yok — PC'den tek komut:
+
+```bat
+9928.bat
+```
+
+Repo klasöründe çift tık veya CMD:
+
+```bat
+cd C:\Users\oalpe\Desktop\neo_gps
+9928.bat
+```
+
+Ne yapar:
+1. Dosyaları SSH ile karta yükler
+2. FPGA bitstream yükler
+3. **systemd `neo-gps.service`** kurar → her açılışta `http://192.168.2.99:8080` hazır
+4. Tarayıcıyı açar
+
+Kartta servis kontrolü:
+
+```bash
+systemctl status neo-gps
+journalctl -u neo-gps -f    # veya: tail -f ~/neo_gps/gps_web.log
+```
+
+---
+
 ## Deploy from PC (one click)
 
 PC and board on the same network (default board IP **192.168.2.99**). Requires [PuTTY](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) (`plink` in PATH) and Python on the PC.
@@ -199,7 +229,8 @@ run_build.bat    REM → output/gps_uart.*
 
 | Feature | Status |
 |---------|--------|
-| One-click PC deploy | ✅ `deploy_gps.bat` |
+| One-click PC deploy (`9928.bat`) | ✅ SD kart guncellemeden |
+| Boot auto-start (`neo-gps.service`) | ✅ systemd |
 | NMEA decoder UI (6 types) | ✅ live |
 | systemd service (boot auto-start) | planned |
 | GPX / KML track export | planned |

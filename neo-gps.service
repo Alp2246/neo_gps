@@ -1,0 +1,19 @@
+[Unit]
+Description=PYNQ-Z2 NEO-6M GPS Web Dashboard
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/xilinx/neo_gps
+ExecStartPre=/bin/sleep 10
+ExecStartPre=/bin/rm -f /tmp/neo_gps_uart.lock
+ExecStart=/usr/bin/python3 /home/xilinx/neo_gps/gps_web.py
+Restart=always
+RestartSec=8
+StandardOutput=append:/home/xilinx/neo_gps/gps_web.log
+StandardError=append:/home/xilinx/neo_gps/gps_web.log
+
+[Install]
+WantedBy=multi-user.target

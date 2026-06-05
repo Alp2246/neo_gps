@@ -73,20 +73,20 @@ function Install-ViaHttp([string]$BaseUrl) {
 
 function Install-ViaScp {
     Invoke-Board "mkdir -p $RemoteDir"
-    foreach ($name in @('gps_web.py', 'neo_gps_pynq.py', 'start_web.sh', 'install_on_board.sh')) {
+    foreach ($name in @('gps_web.py', 'neo_gps_pynq.py', 'start_web.sh', 'install_on_board.sh', 'install_boot_service.sh', 'neo-gps.service')) {
         Write-Host "  -> $name"
         Send-TextFile (Join-Path $Repo $name) "$RemoteDir/$name"
     }
     Write-Host '  -> gps_uart.bin (~4 MB)'
     Send-BinaryFile (Join-Path $Repo 'output/gps_uart.bin') "$RemoteDir/gps_uart.bin"
-    Invoke-Board "chmod +x $RemoteDir/install_on_board.sh $RemoteDir/start_web.sh && bash $RemoteDir/install_on_board.sh"
+    Invoke-Board "chmod +x $RemoteDir/install_on_board.sh $RemoteDir/install_boot_service.sh $RemoteDir/start_web.sh && SUDO_PASS=$Pass INSTALL_BOOT=1 bash $RemoteDir/install_on_board.sh"
 }
 
 Write-Host '=== PYNQ GPS deploy ===' -ForegroundColor Cyan
 Write-Host "Repo : $Repo"
 Write-Host "Kart : ${User}@${BoardIp}"
 
-foreach ($f in @('gps_web.py', 'neo_gps_pynq.py', 'start_web.sh', 'install_on_board.sh', 'output/gps_uart.bin')) {
+foreach ($f in @('gps_web.py', 'neo_gps_pynq.py', 'start_web.sh', 'install_on_board.sh', 'install_boot_service.sh', 'neo-gps.service', 'output/gps_uart.bin')) {
     if (-not (Test-Path (Join-Path $Repo $f))) {
         Write-Error "Eksik dosya: $f"
     }
@@ -119,13 +119,17 @@ catch {
 
 try {
     Write-Host 'Canli veri kontrolu...'
-    $probe = Invoke-Board "curl -s --connect-timeout 5 http://127.0.0.1:8080/data 2>/dev/null | python3 -c `"import sys,json; d=json.load(sys.stdin); print('fix',d.get('fix'),'lat',d.get('lat'),'lon',d.get('lon'),'sats',d.get('sats_used'))`""
+    $probe = Invoke-Board "curl -s --connect-timeout 5 http://127.0.0.1:8080/data 2>/dev/null | head -c 280"
+    $svc = Invoke-Board "echo $Pass | sudo -S systemctl is-active neo-gps 2>/dev/null || echo inactive"
     Write-Host $probe
+    Write-Host "neo-gps.service: $svc"
 
     $url = "http://${BoardIp}:8080"
     Write-Host ""
     Write-Host "============================================" -ForegroundColor Green
     Write-Host " Hazir: $url" -ForegroundColor Green
+    Write-Host " Acilista otomatik baslar (neo-gps.service)" -ForegroundColor Green
+    Write-Host " PC guncelleme: 9928.bat" -ForegroundColor Green
     Write-Host " Pano + NMEA: $url" -ForegroundColor Green
     Write-Host " API JSON  : $url/data" -ForegroundColor Green
     Write-Host "============================================" -ForegroundColor Green

@@ -1,0 +1,32 @@
+---
+description: Kod 9928 — PYNQ-Z2 NEO-6M GPS calisan durum; PC deploy, otoboot, SD kart dokunma
+alwaysApply: true
+---
+
+# Kod 9928 — PYNQ GPS baseline
+
+When the user says **9928**, they refer to this **stable working setup**. Preserve it; do not break auto-boot or the PC-only deploy workflow.
+
+## Hardware
+
+- Board: **TUL PYNQ-Z2** @ `192.168.2.99`, SSH `xilinx` / `xilinx`
+- GPS: **u-blox NEO-6M** (GY-NEO6MV2), 9600 baud NMEA
+- Wiring (RPi header): VCC→Pin **1**, GND→Pin **6**, GPS TX→Pin **10**, GPS RX→Pin **8**
+- Bitstream: `gps_uart.bin` (AXI UART Lite @ `0x42C00000`)
+
+## Software (do not require SD card reflash for updates)
+
+- **PC deploy:** run `9928.bat` or `deploy_gps.bat` from repo root (`C:\Users\oalpe\Desktop\neo_gps`)
+- Uploads `gps_web.py`, `neo_gps_pynq.py`, `gps_uart.bin` via SSH/SCP
+- Installs **systemd** `neo-gps.service` — GPS web starts automatically on every boot
+- Dashboard: **http://192.168.2.99:8080** (map + NMEA tab GGA/RMC/GSA/GSV/VTG/GLL)
+
+## Rules
+
+- Run **only one** GPS process (`gps_web.py` OR `neo_gps_pynq.py`) — two clients → bus error
+- Software updates = PC deploy (`9928.bat`), **not** SD card image changes
+- Showcase repo: https://github.com/Alp2246/pynq-z2-gps-nmea
+
+## On "9928" request
+
+Use/deploy this baseline; run or suggest `9928.bat`; keep systemd auto-start enabled.
