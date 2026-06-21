@@ -258,25 +258,27 @@ Physical displays (OLED + BMP280 + MAX7219 + GPS) — **not** the web dashboard:
 
 ---
 
-## Related: HC-06 Bluetooth + Web Sohbet (kod 9960)
+## HC-06 Bluetooth + Web Sohbet (kod 9960)
 
-**HC-06** Bluetooth Classic (SPP) on the same UART pins as GPS (`gps_uart.bin`). Browser chat UI, phone **Serial Bluetooth Terminal**, and shareable internet link via Cloudflare tunnel.
+**FPGA UART** + **Python web sohbet** + **internetten paylaşılabilir link** — PYNQ-Z2 üzerinde HC-06 Bluetooth köprüsü.
 
-![HC-06 wiring](docs/gallery/hc06_wiring.png)
-
-![HC-06 web chat](docs/gallery/hc06_chat_web.png)
+<table>
+<tr>
+<td><img src="docs/gallery/hc06_pl_ps_akis.png" width="400" alt="PL PS akış"/></td>
+<td><img src="docs/gallery/hc06_chat_web.png" width="400" alt="Web sohbet"/></td>
+</tr>
+</table>
 
 | | |
 |---|---|
-| **PL / PS rehber** | [hc06_bt/docs/PL_PS.md](hc06_bt/docs/PL_PS.md) |
-| **Deploy** | `hc06_bt/9960.bat` or `YUKLE.bat` → 6 |
-| **Local web** | http://192.168.2.99:8082 |
-| **Internet** | `hc06_bt/internet.bat` → share `trycloudflare.com` link |
-| **Docs** | [hc06_bt/README.md](hc06_bt/README.md) |
+| **Tam dokümantasyon** | [hc06_bt/README.md](hc06_bt/README.md) |
+| **PL vs PS rehberi** | [hc06_bt/docs/PL_PS.md](hc06_bt/docs/PL_PS.md) |
+| **Deploy** | `hc06_bt/9960.bat` · `YUKLE.bat` → 6 |
+| **Yerel** | http://192.168.2.99:8082 |
+| **İnternet** | `hc06_bt/internet.bat` |
 
 ```text
+PL: gps_uart.bin @ 0x42C00000  →  PS: bt_web.py :8082  →  HC-06  →  Bluetooth
 [OK] FPGA state: operating
 [OK] HC-06 sohbet: http://0.0.0.0:8082
 ```
-
-🇹🇷 Detaylı Türkçe rehber: [hc06_bt/README.md](hc06_bt/README.md)
