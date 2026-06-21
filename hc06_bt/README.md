@@ -7,9 +7,44 @@
 
 **TUL PYNQ-Z2** üzerinde **HC-06 Bluetooth Classic (SPP)** modülü: FPGA **AXI UART Lite** (`gps_uart.bin`, `0x42C00000`), Python **MMIO** köprüsü, **WhatsApp tarzı web sohbet** ve telefon **Serial Bluetooth Terminal** desteği. İnternetten paylaşılabilir link ile uzaktan mesajlaşma (Cloudflare Quick Tunnel).
 
+> 🇹🇷 **PL (FPGA) vs PS (Linux) ne yapıyor?** → [docs/PL_PS.md](docs/PL_PS.md) — detaylı katman rehberi + görseller
+
+![PL ↔ PS veri akışı](docs/pl_ps_akis.png)
+
 ![HC-06 kablolama](docs/wiring.png)
 
 ![Web sohbet arayüzü](docs/chat_web.png)
+
+---
+
+## PL vs PS — Zynq iki dünyası
+
+PYNQ-Z2 = **PL (FPGA)** + **PS (ARM Linux)**. HC-06 projesi ikisini birlikte kullanır.
+
+| Katman | Ne? | Bu projede |
+|--------|-----|------------|
+| **PL** | FPGA donanımı | `gps_uart.bin` → UART IP → Pin 8/10 |
+| **PS** | Linux + Python | `bt_web.py`, `neo_gps_pynq.py` → MMIO |
+
+### PL tarafı (donanım / FPGA)
+
+![PL tarafı](docs/pl_tarafi.png)
+
+- Vivado'da tasarlanan **AXI UART Lite** IP bloğu
+- `gps_uart.bin` bitstream kartına yüklenir → `state: operating`
+- Fiziksel pinler: **Pin 8 = TX**, **Pin 10 = RX** (RPi header)
+- HC-06 ile **9600 baud** seri haberleşme
+
+### PS tarafı (yazılım / Linux)
+
+![PS tarafı](docs/ps_tarafi.png)
+
+- PYNQ Linux üzerinde **Python 3** çalışır
+- `neo_gps_pynq.py` → `/dev/mem` ile `0x42C00000` adresine yazar (PL köprüsü)
+- `bt_web.py` → HTTP sohbet sunucusu (`:8082`)
+- PC'de `internet.bat` → Cloudflare tüneli → dünyaya link
+
+📖 **Tam rehber:** [docs/PL_PS.md](docs/PL_PS.md) — veri akışı, hata ayıklama, dosya listesi
 
 ---
 

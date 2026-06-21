@@ -2,6 +2,9 @@
 
 | Dosya | Proje | Açıklama |
 |-------|-------|----------|
+| [hc06_pl_tarafi.png](hc06_pl_tarafi.png) | **9960 HC-06** | PL tarafı — FPGA, UART IP, pinler |
+| [hc06_ps_tarafi.png](hc06_ps_tarafi.png) | **9960 HC-06** | PS tarafı — Linux, Python, web |
+| [hc06_pl_ps_akis.png](hc06_pl_ps_akis.png) | **9960 HC-06** | PL↔PS↔HC-06 veri akışı |
 | [hc06_wiring.png](hc06_wiring.png) | **9960 HC-06** | PYNQ-Z2 ↔ HC-06 kablolama |
 | [hc06_chat_web.png](hc06_chat_web.png) | **9960 HC-06** | Web sohbet arayüzü (WhatsApp tarzı) |
 | [mpu6050_live_accel.png](mpu6050_live_accel.png) | 9950 MPU6050 | İvme grafiği (demo) |

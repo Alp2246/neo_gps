@@ -268,6 +268,7 @@ Physical displays (OLED + BMP280 + MAX7219 + GPS) — **not** the web dashboard:
 
 | | |
 |---|---|
+| **PL / PS rehber** | [hc06_bt/docs/PL_PS.md](hc06_bt/docs/PL_PS.md) |
 | **Deploy** | `hc06_bt/9960.bat` or `YUKLE.bat` → 6 |
 | **Local web** | http://192.168.2.99:8082 |
 | **Internet** | `hc06_bt/internet.bat` → share `trycloudflare.com` link |
