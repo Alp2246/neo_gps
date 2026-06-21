@@ -1,16 +1,32 @@
 # Gallery — GitHub README görselleri
 
-| Dosya | Proje | Açıklama |
-|-------|-------|----------|
-| [hc06_pl_tarafi.png](hc06_pl_tarafi.png) | **9960 HC-06** | PL tarafı — FPGA, UART IP, pinler |
-| [hc06_ps_tarafi.png](hc06_ps_tarafi.png) | **9960 HC-06** | PS tarafı — Linux, Python, web |
-| [hc06_pl_ps_akis.png](hc06_pl_ps_akis.png) | **9960 HC-06** | PL↔PS↔HC-06 veri akışı |
-| [hc06_wiring.png](hc06_wiring.png) | **9960 HC-06** | PYNQ-Z2 ↔ HC-06 kablolama |
-| [hc06_chat_web.png](hc06_chat_web.png) | **9960 HC-06** | Web sohbet arayüzü (WhatsApp tarzı) |
-| [mpu6050_live_accel.png](mpu6050_live_accel.png) | 9950 MPU6050 | İvme grafiği (demo) |
-| [max7219_digit8.png](max7219_digit8.png) | 9940 LED | MAX7219 rakam 8 (demo) |
+## HC-06 Bluetooth (9960)
 
-Gerçek fotoğraf çekince `photo_*.jpg` ekle ve README'de güncelle.
+| Dosya | Açıklama |
+|-------|----------|
+| [hc06_wiring.png](hc06_wiring.png) | PYNQ-Z2 ↔ HC-06 kablolama |
+| [hc06_chat_web.png](hc06_chat_web.png) | Web sohbet arayüzü |
+| [hc06_pl_tarafi.png](hc06_pl_tarafi.png) | PL — FPGA UART |
+| [hc06_ps_tarafi.png](hc06_ps_tarafi.png) | PS — Linux web |
+| [hc06_pl_ps_akis.png](hc06_pl_ps_akis.png) | Veri akışı |
+
+## MPU6050 IMU (9950)
+
+| Dosya | Açıklama |
+|-------|----------|
+| [mpu6050_dashboard.png](mpu6050_dashboard.png) | Canlı ivme web panosu |
+| [mpu6050_wiring.png](mpu6050_wiring.png) | PYNQ-Z2 ↔ GY-521 kablolama |
+| [mpu6050_pl_tarafi.png](mpu6050_pl_tarafi.png) | PL — I2C GPIO overlay |
+| [mpu6050_ps_tarafi.png](mpu6050_ps_tarafi.png) | PS — Python dashboard |
+| [mpu6050_live_accel.png](mpu6050_live_accel.png) | Ax/Ay/Az demo grafiği |
+
+## MAX7219 LED (9940)
+
+| Dosya | Açıklama |
+|-------|----------|
+| [max7219_digit8.png](max7219_digit8.png) | 8x8 matris rakam 8 |
+
+---
 
 ## Repo linkleri
 
@@ -18,8 +34,8 @@ Gerçek fotoğraf çekince `photo_*.jpg` ekle ve README'de güncelle.
 |-----|--------|--------|
 | 9928 | GPS (kök) | `9928.bat` |
 | 9940 | `max7219_led/` | `9940.bat` |
-| 9950 | `mpu6050/` | `9950.bat` |
+| **9950** | **`mpu6050/`** | **`9950.bat`** |
 | 9930 | `sensor_panel/` | `9930.bat` |
 | **9960** | **`hc06_bt/`** | **`9960.bat`** |
 
-- MPU dashboard: https://github.com/Alp2246/pynq-mpu6050-dashboard
+- MPU PC dashboard: https://github.com/Alp2246/pynq-mpu6050-dashboard

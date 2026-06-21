@@ -250,6 +250,31 @@ MIT — see [LICENSE](LICENSE).
 
 ---
 
+## MPU6050 IMU + Live Dashboard (kod 9950)
+
+**FPGA I2C GPIO** + **MPU6050** 6-eksen sensör + **canlı ivme web panosu**.
+
+<table>
+<tr>
+<td><img src="docs/gallery/mpu6050_dashboard.png" width="400" alt="MPU6050 dashboard"/></td>
+<td><img src="docs/gallery/mpu6050_wiring.png" width="400" alt="MPU6050 wiring"/></td>
+</tr>
+</table>
+
+| | |
+|---|---|
+| **Dokümantasyon** | [mpu6050/README.md](mpu6050/README.md) |
+| **Deploy** | `mpu6050/9950.bat` · `YUKLE.bat` → 2 |
+| **Web (kartta)** | http://192.168.2.99:8081 |
+| **PC dashboard** | [pynq-mpu6050-dashboard](https://github.com/Alp2246/pynq-mpu6050-dashboard) |
+
+```text
+I2C devices: ['0x68']
+Ax ≈ +0.05 g  Ay ≈ +0.04 g  Az ≈ +1.04 g  |A| ≈ 1.04 g
+```
+
+---
+
 ## Related: Sensor Panel (separate project)
 
 Physical displays (OLED + BMP280 + MAX7219 + GPS) — **not** the web dashboard:
