@@ -1,0 +1,24 @@
+{
+  "messages": [
+    {
+      "who": "Ayse",
+      "text": "selam canim",
+      "src": "web",
+      "ts": 1718995200
+    },
+    {
+      "who": "Alp",
+      "text": "merhaba :)",
+      "src": "web",
+      "ts": 1718995202
+    },
+    {
+      "who": "Telefon",
+      "text": "BT test OK",
+      "src": "bt",
+      "ts": 1718995208
+    }
+  ],
+  "tx_count": 5,
+  "rx_count": 1
+}

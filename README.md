@@ -255,3 +255,27 @@ MIT — see [LICENSE](LICENSE).
 Physical displays (OLED + BMP280 + MAX7219 + GPS) — **not** the web dashboard:
 
 → [sensor_panel/README.md](sensor_panel/README.md) · PC deploy: `sensor_panel/9930.bat`
+
+---
+
+## Related: HC-06 Bluetooth + Web Sohbet (kod 9960)
+
+**HC-06** Bluetooth Classic (SPP) on the same UART pins as GPS (`gps_uart.bin`). Browser chat UI, phone **Serial Bluetooth Terminal**, and shareable internet link via Cloudflare tunnel.
+
+![HC-06 wiring](docs/gallery/hc06_wiring.png)
+
+![HC-06 web chat](docs/gallery/hc06_chat_web.png)
+
+| | |
+|---|---|
+| **Deploy** | `hc06_bt/9960.bat` or `YUKLE.bat` → 6 |
+| **Local web** | http://192.168.2.99:8082 |
+| **Internet** | `hc06_bt/internet.bat` → share `trycloudflare.com` link |
+| **Docs** | [hc06_bt/README.md](hc06_bt/README.md) |
+
+```text
+[OK] FPGA state: operating
+[OK] HC-06 sohbet: http://0.0.0.0:8082
+```
+
+🇹🇷 Detaylı Türkçe rehber: [hc06_bt/README.md](hc06_bt/README.md)

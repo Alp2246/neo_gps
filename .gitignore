@@ -43,3 +43,8 @@ output/la_*.csv
 deploy_la_test.*
 fix_and_web.sh
 vivado/ssh_*.bat
+
+# --- HC-06 internet tunnel (buyuk ikili + gecici) ---
+hc06_bt/cloudflared.exe
+hc06_bt/tunnel.log
+hc06_bt/link.txt

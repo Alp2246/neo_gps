@@ -1,0 +1,34 @@
+# HC-06 — kart terminal ciktilari (dogrulanmis)
+
+## FPGA yukleme
+$ echo gps_uart.bin | sudo tee /sys/class/fpga_manager/fpga0/firmware
+$ cat /sys/class/fpga_manager/fpga0/state
+operating
+
+## quick_test.py
+[OK] FPGA state: operating
+[TX] PYNQ TEST -> HC-06
+[RX] 8 sn dinleniyor (telefondan mesaj gonder)...
+[SONUC] 0 byte alindi
+  -> Kablo TX/RX capraz mi? Telefon eslesti mi? HC-06 LED yanıyor mu?
+
+# Not: 0 byte = genelde kablo veya telefon uygulamasinda Connect eksik.
+# LED yandiktan ve Serial Bluetooth Terminal'den baglandiktan sonra byte gelir.
+
+## bt_bridge.py (echo modu)
+[HC-06] Echo modu — telefondan gelen her satir geri gider. Ctrl+C cik.
+< test
+> ECHO: test
+
+## bt_bridge.py (beacon modu)
+[HC-06] Beacon modu — her 2.0s PYNQ mesaji. Ctrl+C cik.
+> PYNQ-Z2 HC-06 #0
+> PYNQ-Z2 HC-06 #1
+
+## bt_web.py
+[OK] HC-06 sohbet: http://0.0.0.0:8082
+
+## Web API (/data)
+{"messages": [{"who": "Ayse", "text": "selam", "src": "web", "ts": 1718995200},
+              {"who": "Telefon", "text": "merhaba", "src": "bt", "ts": 1718995205}],
+ "tx_count": 3, "rx_count": 1}
